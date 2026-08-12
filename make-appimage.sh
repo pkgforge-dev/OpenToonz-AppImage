@@ -24,7 +24,10 @@ LD_LIBRARY_PATH=/usr/lib/opentoonz quick-sharun \
 	/usr/bin/tfarmcontroller \
 	/usr/bin/tfarmserver     \
 	/usr/lib/opentoonz       \
-	/usr/share/opentoonz
+	/usr/share/opentoonz     \
+	/usr/bin/ffmpeg          \
+	/usr/bin/ffprobe         \
+
 
 # Additional changes can be done in between here
 
