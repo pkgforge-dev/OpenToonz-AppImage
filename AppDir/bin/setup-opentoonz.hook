@@ -1,0 +1,30 @@
+#!/bin/sh
+
+OPENTOONZ_BASE=$APPDIR
+
+# follow XDG Base dir spec
+_configdir=${XDG_CONFIG_HOME:-~/.config}/OpenToonz
+mkdir -p "$_configdir"
+
+[ -d "$_configdir"/stuff ]                  || cp -r "$OPENTOONZ_BASE"/share/opentoonz/stuff "$_configdir"
+[ -d "$_configdir"/stuff/projects/library ] || mkdir -p "$_configdir"/stuff/projects/library
+[ -d "$_configdir"/stuff/projects/fxs ]     || mkdir -p "$_configdir"/stuff/projects/fxs
+
+if [ ! -e "$_configdir"/SystemVar.ini ]; then
+	cat <<-EOF > "$_configdir"/SystemVar.ini
+	[General]
+	OPENTOONZROOT="$_configdir/stuff"
+	OpenToonzPROFILES="$_configdir/stuff/profiles"
+	TOONZCACHEROOT="$_configdir/stuff/cache"
+	TOONZCONFIG="$_configdir/stuff/config"
+	TOONZFXPRESETS="$_configdir/stuff/fxs"
+	TOONZLIBRARY="$_configdir/stuff/library"
+	TOONZPROFILES="$_configdir/stuff/profiles"
+	TOONZPROJECTS="$_configdir/stuff/projects"
+	TOONZROOT="$_configdir/stuff"
+	TOONZSTUDIOPALETTE="$_configdir/stuff/studiopalette"
+	EOF
+fi
+
+export LD_LIBRARY_PATH="$OPENTOONZ_BASE/lib/opentoonz:$LD_LIBRARY_PATH"
+
